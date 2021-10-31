@@ -1,10 +1,10 @@
 {
-  "name": "zepay",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "name": "zepay-hex",
+  "version": "1.0.0",
+  "description": "TC Payment System by ZETEAM",
+  "author": "Shohrux <shqosimov@webhook.uz>",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -24,9 +24,11 @@
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "bignumber.js": "^9.0.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "ts-mockito": "^2.6.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
