@@ -9,9 +9,9 @@ export class SendMoneyService implements SendMoneyUseCase {
     private readonly _updateAccountPort: UpdateAccountStatePort,
   ) {}
 
-  sendMoney(command: SendMoneyCommand): boolean {
-    const sourceAccount = this._loadAccountPort.loadAccount(command.sourceAccountId);
-    const targetAccount = this._loadAccountPort.loadAccount(command.targetAccountId);
+  async sendMoney(command: SendMoneyCommand): Promise<boolean> {
+    const sourceAccount = await this._loadAccountPort.loadAccount(command.sourceAccountId);
+    const targetAccount = await this._loadAccountPort.loadAccount(command.targetAccountId);
 
     if (!sourceAccount.withdraw(command.money, targetAccount.id)) {
       return false;

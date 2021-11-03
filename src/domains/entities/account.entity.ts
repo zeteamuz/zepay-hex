@@ -24,41 +24,25 @@ export class AccountEntity {
   }
 
   public calculateBalance(): MoneyEntity {
-    return MoneyEntity.add(
-      this._baseLineBalance,
-      this._transaction.calculateBalance(this.id),
-    );
+    return MoneyEntity.add(this._baseLineBalance, this._transaction.calculateBalance(this.id));
   }
 
   public withdraw(amount: MoneyEntity, targetAccountId: AccountId): boolean {
     if (!this._mayWithdrawMoney(amount)) {
       return false;
     }
-    const withdrawal = new ActivityEntity(
-      this._id,
-      targetAccountId,
-      amount,
-      new Date(),
-    );
+    const withdrawal = new ActivityEntity(this._id, this._id, targetAccountId, amount, new Date());
     this.transaction.addActivity(withdrawal);
     return true;
   }
 
   public deposit(amount: MoneyEntity, sourceAccountId: AccountId): boolean {
-    const deposit = new ActivityEntity(
-      sourceAccountId,
-      this._id,
-      amount,
-      new Date(),
-    );
+    const deposit = new ActivityEntity(this._id, sourceAccountId, this._id, amount, new Date());
     this.transaction.addActivity(deposit);
     return true;
   }
 
   private _mayWithdrawMoney(amount: MoneyEntity): boolean {
-    return MoneyEntity.add(
-      this.calculateBalance(),
-      amount.negate(),
-    ).isPositiveOrZero();
+    return MoneyEntity.add(this.calculateBalance(), amount.negate()).isPositiveOrZero();
   }
 }
